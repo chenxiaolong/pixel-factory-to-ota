@@ -1,0 +1,11 @@
+[project]
+name = "pixel-factory-to-ota"
+version = "0.1.0"
+description = "Convert a Pixel factory image to a full OTA"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "protobuf>=7.35.1",
+    "pydantic>=2.13.4",
+    "tomlkit>=0.15.1",
+]
