@@ -481,27 +481,6 @@ def generate_ota(
     )
 
 
-def compare_versions(a: str, b: str) -> int:
-    a_pieces = tuple(int(p) for p in a.split('.'))
-    b_pieces = tuple(int(p) for p in b.split('.'))
-
-    if a_pieces < b_pieces:
-        return -1
-    elif a_pieces > b_pieces:
-        return 1
-    else:
-        return 0
-
-
-def check_avbroot_version():
-    output = subprocess.check_output(['avbroot', '--version'])
-    version = output.strip().split()[-1].decode('ASCII')
-    required = '3.32.1'
-
-    if compare_versions(version, required) < 0:
-        raise ValueError(f'avbroot version is too old: {version} < {required}')
-
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -527,8 +506,6 @@ def parse_args():
 
 def main():
     args = parse_args()
-
-    check_avbroot_version()
 
     if args.work_dir is not None:
         generate_ota(args.input, args.output, args.work_dir)
